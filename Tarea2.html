@@ -5,45 +5,158 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Tarea 2 </title>
+    <style>
+        fieldset {
+          background-color:lightblue;
+          width: 30%;
+        }
+        
+        legend {
+          background-color: gray;
+          color: white;
+          padding: 5px 10px;
+        }
+        
+        input {
+          margin: 5px;
+        }
+        </style>
 </head>
 <body>
     <form name="Tarea 2" action="">
         <h1>Favor ingresar sus datos personales</h1>
+        <fieldset>
+            <legend>Datos 1</legend>
+            <p>
+                Nombre de Usuario:            
+                <input type="text" name="Nombre" placeholder="Ingrese su nombre"/>
+            </p>
+            <p>
+                Primer apellido:
+                <input type="text" name="Primer apellido" placeholder="Ingrese su primer apellido"/>
+            </p>
+            <p>
+                Segundo apellido:
+                <input type="text" name="Segundo apellido" placeholder="Ingrese su segundo apellido"/>
+            </p>
+            <p>
+                Fecha de nacimiento:
+                <input type="date" name="fecha de nacimiento"/>
+            </p>
+            <p>
+                Genero:
+                <br>
+                <input type="radio" name="genero" value="H"/>Hombre
+                <br>
+                <input type="radio" name="genero" value="M"/>Mujer
+            </p>
+            <p>
+                Estado Civil:
+                <br>
+                <input type="checkbox" name="Estado Civil" value="Soltero"/>Soltero
+                <br>
+                <input type="checkbox" name="Estado Civil" value="Casado"/>Casado
+                <br>
+                <input type="checkbox" name="Estado Civil" value="Divorciado"/>Divorciado
+            </p>
+            <p>
+                Correo:
+                <input type="email" name="Correo" placeholder="correo@dominio.com"/>
+            </p>
+            <p>
+                Telefono:
+                <input type="tel" name="Telefono" placeholder="(+###)####-####"/>
+            </p>
+            <p>
+                A&ntilde;os de experiencia:
+                <input type="number" name="Años de experiencia" min="1" max="100"/> 
+            </p>
+    </fieldset>
         <p>
-            Nombre de Usuario:            
-            <input type="text" name="Nombre" placeholder="Ingrese su nombre"/>
-        </p>
-        <p>
-            Primer apellido:
-            <input type="text" name="Primer apellido" placeholder="Ingrese su primer apellido"/>
-        </p>
-        <p>
-            Segundo apellido:
-            <input type="text" name="Segundo apellido" placeholder="Ingrese su segundo apellido"/>
-        </p>
-        <p>
-            Fecha de nacimiento:
-            <input type="date" name="fecha de nacimiento"/>
-        </p>
-        <p>
-            Genero:
-            <br>
-            <input type="radio" name="genero" value="H"/>Hombre
-            <br>
-            <input type="radio" name="genero" value="M"/>Mujer
-        </p>
-        <p>
-            Estado Civil:
-            <br>
-            <input type="checkbox" name="Estado Civil" value="Soltero"/>Soltero
-            <br>
-            <input type="checkbox" name="Estado Civil" value="Casado"/>Casado
-            <br>
-            <input type="checkbox" name="Estado Civil" value="Divorciado"/>Divorciado
-        </p>
-        <p>
-            Correo
-        </p>
+            <fieldset>
+                <legend>Datos 2</legend>
+                Educacion:
+                <br>
+                <input type="checkbox" value="Primaria"/>Primaria
+                <br>
+                <input type="checkbox" value="Secundaria"/>Secundaria
+                <br>
+                <input type="checkbox" value="Tecnica"/>T&eacute;cnica
+                <br>
+                <input type="checkbox" value="Terciaria o Colegio Universitario"/>Terciaria o Colegio Universitario
+                <br>
+                <input type="checkbox" value="Diplomado"/>Diplomado
+                <br>
+                <input type="checkbox" value="Bachillerato"/>Bachillerato
+                <br>
+                <input type="checkbox" value="Licenciatura"/>Licenciatura
+                <br>
+                <input type="checkbox" value="Maestria"/>Maestria
+                <br>
+                <input type="checkbox" value="Doctorado"/>Doctorado
+                <br>
+                <input type="checkbox" value="Estudios post doctorales"/>Estudios post doctorales
+                <br>
+                <input type="checkbox" value="Postgrado"/>Postgrado    
+            </p>
+            <p>
+                Descripci&oacute;n Personal:
+                <div><p></p></div>
+                <textarea name="Descripcion" placeholder="Descripcion" rows="10" cols="50"></textarea>
+            </p>
+            <p>
+                Direcci&oacute;n
+                <br>
+                Provincia: 
+                <select name="Provincia">
+                    <option value="Seleccione">Seleccione</option>
+                    <option value="San Jose">San Jos&eacute;</option>
+                    <option value="Cartago">Cartago</option>
+                    <option value="Alajuela">Alajuela</option>
+                </select>
+                <br>
+                Canton: 
+                <select name="Canton">
+                    <option value="Seleccione">Seleccione</option>
+                    <optgroup label="San Jose">
+                        <option value="Desamparados">Desamparados</option>
+                        <option value="Alajuelita">Alajuelita</option>
+                        <option value="Aserri">Aserri</option>
+                    </optgroup>
+                    <optgroup label="Heredia">
+                        <option value="Barva">Barva</option>
+                        <option value="Santo Domingo">Santo Domingo</option>
+                        <option value="San Rafael">San Rafael</option>
+                    </optgroup>
+                    <optgroup label="Cartago">
+                        <option value="Paraiso">Paraiso</option>
+                        <option value="Turrialba">Turrialba</option>
+                        <option value="Oreamuno">Oreamuno</option>
+                    </optgroup>
+                </select>
+            </p>
+            <div><p></p></div>
+            <p>
+                Password: 
+                <input type="password" name="Contraseña" placeholder="Contraseña"/>
+                <br>
+                Confirmaci&oacute;n Password: 
+                <input type="password" name="Contraseña" placeholder="Contraseña"/>
+            </p>
+            <div><p></p></div>
+            <p>
+                Semana en la que puede ser contactado:
+                <input type="week" name="Week"/>
+                <br>
+                Horario en el que puede ser contactado:
+                <input type="time" name="time"/>
+                <br>
+                Dias de preaviso a dar:
+                <input type="range" name="rango" min="0" max="50" step="0"/>
+            </p>
+            </fieldset>
+            <div><p></p></div>
+            <input type="image" src="telegram-icon.png" alt="enviar"/>
     </form>
 </body>
 </html>
