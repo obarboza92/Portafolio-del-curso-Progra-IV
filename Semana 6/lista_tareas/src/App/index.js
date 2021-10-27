@@ -1,10 +1,31 @@
 import './App.css';
 import React from 'react'
-import { Encabezado} from '../Encabezado/'
-import { BarraBusqueda } from '../BarraBusqueda/'
-import { ListaTareas } from '../ListaTareas/'
-import { Tarea } from '../Tarea/'
+import { UI } from './ui'
 
+//hook
+function useCookies(nombreCookie, contenidoCookie){
+  const almacenamientoLocal = localStorage.getItem(nombreCookie)
+  let elementoGuardado
+  if(!almacenamientoLocal){
+    //Serializacion
+    const elementoSerializado = JSON.stringify(contenidoCookie)
+    localStorage.setItem(nombreCookie, elementoSerializado)
+    elementoGuardado = contenidoCookie
+  }else{
+    //Deserializacion
+    elementoGuardado = JSON.parse(almacenamientoLocal)
+  }
+  const [elemento, setElemento] = React.useState(elementoGuardado)
+  const guardar = (elementos) =>{
+    if(elementos.length <= 0){
+      localStorage.removeItem(nombreCookie)
+    }else{
+      const elementoSerializados = JSON.stringify(elementos)
+      localStorage.setItem(nombreCookie, elementoSerializados)
+    }
+  }
+  return [elemento, setElemento]
+}
 
 function App() {
   const tareasDefault = [
@@ -12,26 +33,17 @@ function App() {
     {texto: "Tarea 2", completada: false},
     {texto: "Tarea 3", completada: false}
   ]
-  
-  const tareasCompletadas = tareasDefault.filter(tarea => tarea.completada).length
-  const totalTareas = tareasDefault.length
-
-
   const miListaTareas = 'MI_LISTA_TAREAS'
-  const almacenamientoLocal = localStorage.getItem(miListaTareas)
-  let tareasGuardadas
-  if(!almacenamientoLocal){
-    const tareasSerializadas = JSON.stringify(tareasDefault)
-    localStorage.setItem(miListaTareas, tareasSerializadas)
-    tareasGuardadas = tareasDefault
-  }else{
-    tareasGuardadas = JSON.parse(almacenamientoLocal)
-  }
-
+  
+  // uso de customer hooks
+  const [tareas, guardar] = useCookies(miListaTareas, tareasDefault)
 
   //Hooks de React para interactuar con el DOM
-  const[tareas, setTareas] = React.useState(tareasGuardadas)
+
   const [valorBuscado, buscarTarea] = React.useState('')
+
+  const tareasCompletadas = tareas.filter(tarea => tarea.completada).length
+  const totalTareas = tareasDefault.length
 
   //Comportamiento de busqueda
   let tareasBuscadas = []
@@ -47,14 +59,7 @@ function App() {
     )
   }
 
-  const guardar = (tareas)=>{
-    if(tareas.length <=0){
-      localStorage.removeItem(miListaTareas)
-    }else{
-      const nuevasTareas = JSON.stringify(tareas)
-      localStorage.setItem(miListaTareas, nuevasTareas)
-    }
-  }
+
 
   const completar = (texto) =>{
     // eslint-disable-next-line
@@ -62,7 +67,6 @@ function App() {
     const nuevaLista = [...tareas]
     nuevaLista[indice].completada = !nuevaLista[indice].completada
     guardar(nuevaLista)
-    setTareas(nuevaLista)
   }  
   
 
@@ -72,30 +76,24 @@ function App() {
     const nuevaLista = [...tareas]
     nuevaLista.splice(indice, 1)
     guardar(nuevaLista)
-    setTareas(nuevaLista)
   }
 
+
+  const nombreAutorCookie = 'NOMBRE_AUTOR'
+  const nombreAutorValor = 'JANE DOE'
+  const[nombreDelAutor, guardarAutor] = useCookies(nombreAutorCookie, nombreAutorValor)
+
   return (
-    <React.Fragment>
-      <Encabezado
-        completadas={tareasCompletadas}
-        total={totalTareas}
+      <UI
+      tareasCompletadas = {tareasCompletadas}
+      totalTareas={totalTareas}
+      valorBuscado={valorBuscado}
+      buscarTarea={buscarTarea}
+      tareasBuscadas={tareasBuscadas}
+      completar={completar}
+      borrar={borrar}
+      nombreDelAutor = {nombreDelAutor}
       />
-      <BarraBusqueda
-        valorBusqueda={valorBuscado}
-        funcionBuscar={buscarTarea}
-      />
-      <ListaTareas>
-        {tareasBuscadas.map(tarea =>(
-          <Tarea
-            texto={tarea.texto}
-            completada={tarea.completada}
-            onComplete={()=>completar(tarea.texto)}
-            onDelete={()=>borrar(tarea.texto)}
-          />
-        ))}
-      </ListaTareas>
-    </React.Fragment>
   )
 }
 
